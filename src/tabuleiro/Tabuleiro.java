@@ -5,6 +5,9 @@ public class Tabuleiro {
     private Peca[][] pecas;
 
     public Tabuleiro(int linhas, int colunas) {
+        if(linhas<1 || colunas<1){
+            throw new TabuleiroException("Tamanho do tabuleiro inválido");
+        }
         this.linhas = linhas;
         this.colunas = colunas;
         pecas = new Peca[linhas][colunas];
@@ -14,27 +17,42 @@ public class Tabuleiro {
         return linhas;
     }
 
-    public void setLinhas(int linhas) {
-        this.linhas = linhas;
-    }
 
     public int getColunas() {
         return colunas;
     }
 
-    public void setColunas(int colunas) {
-        this.colunas = colunas;
-    }
     
     public Peca peca(int linha, int coluna){
+        if(!posicaoExiste(linha,coluna)){
+            throw new TabuleiroException("A posição "+ linha+","+coluna+" não existe");
+        }
         return pecas[linha][coluna];
     }
     public Peca peca (Posicao posicao){
+        if(!posicaoExiste(posicao)){
+            throw new TabuleiroException("A posição "+ posicao+" não existe");
+        }
         return pecas[posicao.getLinha()][posicao.getColuna()];
     }
     public void colocarPeca(Peca peca, Posicao posicao){
+        if(ocupada(posicao)){
+            throw new TabuleiroException("Já há uma peça na posição "+posicao );
+        }
         pecas[posicao.getLinha()][posicao.getColuna()] = peca;
         peca.posicao = posicao;
+    }
+    private boolean posicaoExiste(int linha,int coluna){
+        return linha>=0 && linha<linhas && coluna>=0 && coluna<colunas;
+    } 
+    public boolean posicaoExiste(Posicao posicao){
+        return posicaoExiste(posicao.getLinha(),posicao.getColuna());
+    }
+    public boolean ocupada (Posicao posicao){
+        if(!posicaoExiste(posicao)){
+            throw new TabuleiroException("A posição "+ posicao+" não existe" );
+        }
+        return peca(posicao)!=null;
     }
     
 }
