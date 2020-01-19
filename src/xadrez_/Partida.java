@@ -26,6 +26,9 @@ public class Partida {
         }
         return mat;
     }
+    private void ColocarNovaPeca(char coluna,int linha,PecaXadrez peca){
+        tabuleiro.colocarPeca(peca,new PosicaoXadrez(coluna,linha).Converter());
+    }
     private void FormacaoInicial (){
         tabuleiro.colocarPeca(new Torre(tabuleiro,Cor.BRANCO),new Posicao(0,0));
         tabuleiro.colocarPeca(new Torre(tabuleiro,Cor.BRANCO),new Posicao(0,7));
