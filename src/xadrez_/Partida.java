@@ -1,8 +1,10 @@
 package xadrez_;
 
+import tabuleiro.Peca;
 import tabuleiro.Tabuleiro;
 import xadrez_.pecas.Torre;
 import tabuleiro.Posicao;
+import tabuleiro.TabuleiroException;
 import xadrez_.pecas.Bispo;
 import xadrez_.pecas.Cavalo;
 import xadrez_.pecas.Peao;
@@ -14,7 +16,7 @@ public class Partida {
     
     public Partida(){
         tabuleiro = new Tabuleiro (8,8);
-        FormacaoInicial();
+        formacaoInicial();
     }
     
     public PecaXadrez[][] getPecas(){
@@ -26,10 +28,31 @@ public class Partida {
         }
         return mat;
     }
+    public PecaXadrez movimentoDePeca(PosicaoXadrez Origem, PosicaoXadrez Destino){
+        Posicao origem = Origem.Converter();
+        Posicao destino = Destino.Converter();
+        verificacao(origem);
+        Peca pecaCapturada = mover(origem,destino);
+        return (PecaXadrez) pecaCapturada;
+    }
+    private void verificacao (Posicao o){
+        if(!tabuleiro.ocupada(o)){
+            throw new Xadrez_Exception ("Não há nenhuma pessa na posicao "+o+""
+                    + " para selecionar");
+        }
+    }
+    private Peca mover (Posicao o, Posicao d){
+        Peca po = tabuleiro.peca(o);
+        Peca pd = tabuleiro.peca(d);
+        tabuleiro.removerPeca(d);
+        tabuleiro.colocarPeca(po,d);
+        tabuleiro.removerPeca(o);
+        return pd;
+    }
     private void ColocarNovaPeca(char coluna,int linha,PecaXadrez peca){
         tabuleiro.colocarPeca(peca,new PosicaoXadrez(coluna,linha).Converter());
     }
-    private void FormacaoInicial (){
+    private void formacaoInicial (){
         tabuleiro.colocarPeca(new Torre(tabuleiro,Cor.BRANCO),new Posicao(0,0));
         tabuleiro.colocarPeca(new Torre(tabuleiro,Cor.BRANCO),new Posicao(0,7));
         tabuleiro.colocarPeca(new Torre(tabuleiro,Cor.PRETO),new Posicao(7,7));
