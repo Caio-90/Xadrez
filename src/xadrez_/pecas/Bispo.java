@@ -22,5 +22,10 @@ public class Bispo extends PecaXadrez {
     public String toString(){
         return "B";
     } 
+
+    @Override
+    public boolean[][] Movimentos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

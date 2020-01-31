@@ -64,5 +64,7 @@ public class Tabuleiro {
         }
         return peca(posicao)!=null;
     }
-    
+         
+   
 }
+ 

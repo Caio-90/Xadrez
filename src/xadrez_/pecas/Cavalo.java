@@ -22,5 +22,11 @@ public class Cavalo extends PecaXadrez {
     public String toString(){
         return "C";
     }
+
+    @Override
+    public boolean[][] Movimentos() {
+        boolean[][]mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+        return mat;
+    }
     
 }

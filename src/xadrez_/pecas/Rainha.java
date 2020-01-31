@@ -23,4 +23,9 @@ public class Rainha extends PecaXadrez {
         return "r";
     }
     
+    @Override
+    public boolean[][] Movimentos() {
+        boolean[][]mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+        return mat;
+    }
 }

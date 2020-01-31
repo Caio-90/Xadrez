@@ -9,7 +9,8 @@ import xadrez_.pecas.Cavalo;
 import xadrez_.pecas.Peao;
 import xadrez_.pecas.Rainha;
 import xadrez_.pecas.Rei;
-
+        
+        
 public class Partida {
     private Tabuleiro tabuleiro;
     
@@ -31,13 +32,17 @@ public class Partida {
         Posicao origem = Origem.Converter();
         Posicao destino = Destino.Converter();
         verificacao(origem);
+        movimentoPossivel(origem,destino);
         Peca pecaCapturada = mover(origem,destino);
         return (PecaXadrez) pecaCapturada;
     }
     private void verificacao (Posicao o){
         if(!tabuleiro.ocupada(o)){
-            throw new Xadrez_Exception ("Não há nenhuma pessa na posicao "+o+""
+            throw new Xadrez_Exception ("Não há nenhuma pessa na posicao "+PosicaoXadrez.Convercao(o)+""
                     + " para selecionar");
+        }
+        if(tabuleiro.peca(o).HaMovimentosPossiveis()==false){
+            throw new Xadrez_Exception("Não há movimentos possíveis para a peça");
         }
     }
     private Peca mover (Posicao o, Posicao d){
@@ -47,6 +52,9 @@ public class Partida {
         tabuleiro.colocarPeca(po,d);
         tabuleiro.removerPeca(o);
         return pd;
+    }
+    private void movimentoPossivel(Posicao o,Posicao d){
+        
     }
     private void ColocarNovaPeca(char coluna,int linha,PecaXadrez peca){
         tabuleiro.colocarPeca(peca,new PosicaoXadrez(coluna,linha).Converter());
