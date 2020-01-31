@@ -28,6 +28,12 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
         
+    
+    // https://stackoverflow.com/questions/2979383/java-clear-the-console
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }   
     public static void printTabuleiro(PecaXadrez[][] pecas){
        for(int i=0;i<pecas.length;i++){
            System.out.print((8-i)+ " ");
@@ -38,7 +44,7 @@ public class UI {
        }
        System.out.println("  a b c d e f g h");
    }
-    private static void printPeca(PecaXadrez peca){
+    public static void printPeca(PecaXadrez peca){
        
        if(peca == null){
            System.out.print("-");
@@ -55,10 +61,9 @@ public class UI {
     }
     public static PosicaoXadrez lerPosicaoDeXadrez (Scanner sc){
         try{
-           String s =sc.nextLine();
+           String s = sc.nextLine();
            char coluna = s.charAt(0);
-           int linha = s.charAt(1);
-            //int linha = Integer.parseInt(s.substring(1));
+           int linha = Integer.parseInt(s.substring(1));
             PosicaoXadrez posX = new PosicaoXadrez(coluna,linha);
             return posX; 
         }catch(RuntimeException e){

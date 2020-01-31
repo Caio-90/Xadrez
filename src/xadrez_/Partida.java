@@ -4,7 +4,6 @@ import tabuleiro.Peca;
 import tabuleiro.Tabuleiro;
 import xadrez_.pecas.Torre;
 import tabuleiro.Posicao;
-import tabuleiro.TabuleiroException;
 import xadrez_.pecas.Bispo;
 import xadrez_.pecas.Cavalo;
 import xadrez_.pecas.Peao;
